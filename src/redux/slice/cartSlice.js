@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"
 
 
 
@@ -6,11 +6,11 @@ export const cartSlice = createSlice({
     name : 'cart',
     initialState : [],
     reducers : {
-        addToCart : (state, action)=>{
-            state.push(action, payload)
+        addToCart : (state, actions)=>{
+            state.push(actions.payload)
         },
-        removeItemCart : (state, action)=>{
-            state.filter(item=>item.id!=action.payload)
+        removeItemCart : (state, actions)=>{
+            return state.filter(item=>item.id!=actions.payload)
         }
     }
 })

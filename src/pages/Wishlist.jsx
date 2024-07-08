@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromWishlist } from '../redux/slice/wishlistSlice';
+import { addToCart } from '../redux/slice/cartSlice';
 
 
 function Wishlist() {
@@ -14,6 +15,13 @@ function Wishlist() {
   console.log(wishlistArray);
 
   const dispatch = useDispatch()
+
+  const handlecart = (item)=>{
+    dispatch(addToCart(item))
+    dispatch(removeFromWishlist(item.id))
+  }
+
+
   return (
     <>
     { wishlistArray?.length>0?
@@ -29,7 +37,7 @@ function Wishlist() {
           </Card.Text>
           <div className='d-flex  justify-content-between'>
             <Button variant='danger' onClick={()=>dispatch(removeFromWishlist(item.id))}><FontAwesomeIcon icon={faTrash} /></Button>
-            <Button variant='success'><FontAwesomeIcon icon={faCartShopping} /></Button>
+            <Button variant='success' onClick={()=>handlecart(item)}><FontAwesomeIcon icon={faCartShopping} /></Button>
           </div>
         </Card.Body>
       </Card>

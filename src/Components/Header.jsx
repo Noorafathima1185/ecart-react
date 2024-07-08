@@ -6,14 +6,17 @@ import { faCartShopping, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge';
+import { useSelector } from 'react-redux';
 
 
 
 
 function Header() {
+  const wishlistArray = useSelector((state)=>state.wishlistReducer)
+  const cartArray = useSelector((state)=>state.cartReducer)
   return (
     <>
-    <Navbar style={{backgroundColor:'grey'}} data-bs-theme="dark" expand="lg" className="ms-3 me-3">
+    <Navbar style={{backgroundColor:'grey', top:'0px', position:'fixed', zIndex:'1'}} data-bs-theme="dark" expand="lg" className="ms-3 me-3">
       <Container>
       <Link to={'/'}>
         <Navbar.Brand href="#home"><FontAwesomeIcon icon={faCartShopping} className='me-3' />E-Cart</Navbar.Brand>
@@ -23,13 +26,13 @@ function Header() {
           <Nav className="ms-auto">
 
             <Nav.Link>
-                <Link to={'/wishlist'}> <button className='btn border rounded me-5 mt-2'> <FontAwesomeIcon icon={faHeart} style={{color: "#ff3d3d",}} className='me-2'/>  Wishlist  <Badge bg="secondary" className='rounded ms-2'>0</Badge>
+                <Link to={'/wishlist'}> <button className='btn border rounded me-5 mt-2'> <FontAwesomeIcon icon={faHeart} style={{color: "#ff3d3d",}} className='me-2'/>  Wishlist  <Badge bg="secondary" className='rounded ms-2'>{wishlistArray.length}</Badge>
                 </button> </Link>
                 
             </Nav.Link>
 
             <Nav.Link>
-                <Link to={'/cart'}> <button className='btn border rounded me-5 mt-2'> <FontAwesomeIcon icon={faCartShopping} style={{color: "#FFD43B",}} className='me-2'/>  Cart <Badge bg="secondary" className='rounded ms-2'>0</Badge> </button> </Link>
+                <Link to={'/cart'}> <button className='btn border rounded me-5 mt-2'> <FontAwesomeIcon icon={faCartShopping} style={{color: "#FFD43B",}} className='me-2'/>  Cart <Badge bg="secondary" className='rounded ms-2'>{cartArray.length}</Badge> </button> </Link>
                 
             </Nav.Link>
           </Nav>
